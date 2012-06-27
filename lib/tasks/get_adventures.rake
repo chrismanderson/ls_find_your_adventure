@@ -27,6 +27,7 @@ class LivingSocial
 
   def self.parse(page)
     title = page.root.css(".deal-title h1").text.split(" - ").first.strip
+    puts title
     city = page.root.css(".deal-title p").text.split(%r{\W{2,}})[-2]
     state = page.root.css(".deal-title p").text.split(",")[-1].strip
     price = page.root.css('.deal-price').text.split(%r{\D})[-1]
@@ -54,11 +55,12 @@ class LivingSocial
   def self.save_to_db(adventures)
     puts adventures.first.inspect
     adventures.each do |params|
+      db_market = Market.find_or_create_by_city params[:market]
       db_adventure = Adventure.find_or_initialize_by_title params[:title]
       db_adventure.details = params[:details]
       db_adventure.description = params[:description]
       db_adventure.price = params[:price]
-      db_adventure.market = params[:market]
+      db_adventure.market_id = db_market.id
       db_adventure.city = params[:city]
       db_adventure.state = params[:state]
       db_adventure.zipcode = params[:zipcode]
@@ -67,6 +69,10 @@ class LivingSocial
       db_adventure.longitude = params[:longitude]
       db_adventure.save
     end
+  end
+
+  def self.create_market(market)
+
   end
 
   def self.fetch_all

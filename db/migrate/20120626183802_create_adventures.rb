@@ -13,6 +13,7 @@ class CreateAdventures < ActiveRecord::Migration
       t.float       :latitude
       t.float       :longitude
       t.boolean     :sold_out
+      t.integer     :market_id
       t.timestamps
     end
   end
