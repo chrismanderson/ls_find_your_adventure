@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20120627030216) do
 
   create_table "markets", :force => true do |t|
     t.string   "city"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

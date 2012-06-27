@@ -56,6 +56,9 @@ class LivingSocial
     puts adventures.first.inspect
     adventures.each do |params|
       db_market = Market.find_or_create_by_city params[:market]
+      db_market.latitude = params[:latitude]
+      db_market.longitude = params[:longitude]
+      db_market.save
       db_adventure = Adventure.find_or_initialize_by_title params[:title]
       db_adventure.details = params[:details]
       db_adventure.description = params[:description]

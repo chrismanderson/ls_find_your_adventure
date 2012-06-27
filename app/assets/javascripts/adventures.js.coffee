@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $('#market_sidebar li').live 'click', ->
-    lng = $('#market_sidebar li').data("lng")
-    lat = $('#market_sidebar li').data("lng")
+  $('#market_sidebar li').on 'click', (e) ->
+    e.preventDefault()
+    lng = $(this).data("lng")
+    lat = $(this).data("lat")
 
     Gmaps.map.map.panTo(new google.maps.LatLng(lat, lng))
   
