@@ -2,10 +2,10 @@ class CreateAdventures < ActiveRecord::Migration
   def change
     create_table :adventures do |t|
       t.string      :title
+      t.string      :market
       t.string      :address
       t.string      :city
       t.string      :state
-      t.string      :market
       t.integer     :zipcode
       t.text        :description
       t.text        :details
@@ -13,7 +13,6 @@ class CreateAdventures < ActiveRecord::Migration
       t.float       :latitude
       t.float       :longitude
       t.boolean     :sold_out
-      t.date        :expiration
       t.timestamps
     end
   end
