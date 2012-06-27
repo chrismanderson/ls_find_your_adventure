@@ -12,7 +12,7 @@ img { max-width: none; }
 .map_container img{max-width: none;}
 
 .gmaps4rails_map {
-  height: 400px;
+  height: 800px;
 }
 
 .bing_map {
