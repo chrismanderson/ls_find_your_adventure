@@ -1,21 +1,6 @@
-<h1>Listing adventures</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @adventures.each do |adventure| %>
-  <tr>
-    <td><%= link_to 'Show', adventure %></td>
-    <td><%= link_to 'Edit', edit_adventure_path(adventure) %></td>
-    <td><%= link_to 'Destroy', adventure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Adventure', new_adventure_path %>
+<div class="row">
+  <div class="span8">
+    <h1>Listing adventures</h1>
+      <%= gmaps(@gmap_options) %>
+  </div>
+</div>
