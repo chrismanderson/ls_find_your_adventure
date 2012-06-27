@@ -7,7 +7,9 @@ class AdventuresController < ApplicationController
     @map = @adventures.to_gmaps4rails do |adventure, marker|
       marker.infowindow render_to_string(:partial => "/adventures/infowindow", :locals => { :adventure => adventure})
       marker.title   "#{adventure.title}"
-      marker.json({ :market => adventure.market.city })
+      marker.json({ :market => adventure.market.city, 
+                    :price => adventure.price
+                  })
     end
 
     @gmap_options = {"map_options" => {

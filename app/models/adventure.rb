@@ -6,4 +6,12 @@ class Adventure < ActiveRecord::Base
   def gmaps4rails_address
     "#{self.latitude}, #{self.longitude}"
   end
+
+  def self.max_price
+    Adventure.maximum('price')
+  end
+
+  def self.min_price
+    Adventure.minimum('price') 
+  end
 end

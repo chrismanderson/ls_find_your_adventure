@@ -5,11 +5,26 @@
   </div>
 
   <div class="span4">
-    <ul id="market_sidebar"><%= render @markets %></ul>
+    <h2><a href="#">Filter By Price</a></h2>
+    <div>
+      <div id='price-range'></div>
+      <p>
+        <label for="filtered-rev">Filter by Revenue:</label>
+        <input type="hidden" id="hidden-price" />
+        <div id="filtered-price" ></div>
+      </p>
+    </div>
+    <br>
     <%= select("market", "market_id", 
         Market.all.collect {|p| [ p.city, p.city, 
           {:'data-lat' => p.latitude, :'data-lng' => p.longitude}] }, 
         {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true }) %>
-
-  </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+  var Adventure = {
+    min_price: <%= Adventure.min_price %>,
+    max_price: <%= Adventure.max_price %>
+  }
+</script>
