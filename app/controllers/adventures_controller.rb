@@ -10,12 +10,13 @@ class AdventuresController < ApplicationController
       marker.json({ :market => adventure.market.city })
     end
 
-    @gmap_options = {"map_options" => {"auto_zoom" => false,
-     "zoom" => 10,
-     "zoomControl" => true,
-     "mapTypeControl" => true,
-     "detect_location" => true,
-     "center_on_user" => true},
-                     "markers" => {"data" => @map}}
+    @gmap_options = {"map_options" => {
+      "auto_zoom" => true,
+      "auto_adjust" => true,
+      "mapTypeControl" => true,
+      "detect_location" => true,
+      "center_on_user" => true},
+      "markers" => {"data" => @map}
+    }
   end
 end

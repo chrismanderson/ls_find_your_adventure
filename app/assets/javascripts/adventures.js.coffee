@@ -3,33 +3,28 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  currentFilters = []
+
+  Gmaps.map.callback = ->
+
   $(".chzn-select").chosen()
 
   $("select").change(->
-    str = ""
-    $("select option:selected").each ->
-      str += $(this).text() + " "
-      console.log str
-      console.log $(this)
-      lng = $(this).data("lng")
-      lat = $(this).data("lat")
-      console.log lat
-      console.log lng
-
-      Gmaps.map.map.panTo(new google.maps.LatLng(lat, lng))
+    currentFilters = $('select').val()
+    hideAllMarkers()
+    visibleMarkers()
+    Gmaps.map.adjustMapToBounds()
   )
+    
+  visibleMarkers = ->
+    filtered = Gmaps.map.markers
+    filtered = _.filter(filtered, (marker) ->
+      _.include(currentFilters, marker.market)
+    )
 
-  $('#market_sidebar li').on 'click', (e) ->
-    e.preventDefault()
-    lng = $(this).data("lng")
-    lat = $(this).data("lat")
+    _.each filtered, (marker) ->
+      Gmaps.map.showMarker marker
 
-    Gmaps.map.map.panTo(new google.maps.LatLng(lat, lng))
-  
-  # Gmaps.map.callback = ->
-  #   i = 0
-  #   while i < @markers.length
-  #     console.log Gmaps.map.markers[i].market
-  #     ++i
-
-  # 
+  hideAllMarkers = ->
+    _.each Gmaps.map.markers, (marker) ->
+      Gmaps.map.hideMarker marker
