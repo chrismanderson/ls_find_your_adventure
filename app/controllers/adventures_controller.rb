@@ -1,17 +1,14 @@
 class AdventuresController < ApplicationController
-  # GET /adventures
-  # GET /adventures.json
   def index
     @adventures = Adventure.all
     @markets = Market.all
     @map = @adventures.to_gmaps4rails do |adventure, marker|
       marker.infowindow render_to_string(:partial => "/adventures/infowindow", :locals => { :adventure => adventure})
       marker.title   "#{adventure.title}"
-      marker.sidebar   "#{adventure.title}"
+      marker.sidebar render_to_string(:partial => "/adventures/sidebar", :locals => { :adventure => adventure})
       marker.json({ :market => adventure.market.city, 
                     :price => adventure.price,
                     :name => adventure.title,
-                    :description => adventure.description
                   })
     end
 
