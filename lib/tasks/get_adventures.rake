@@ -7,11 +7,11 @@ class LivingSocial
   end
 
   def self.element?(element)
-    if element
-      true
-    else
-      false
-    end
+    element ? true : false
+  end
+
+  def self.is_adventure?(page)
+    page.root.at_css('div.deal-title')
   end
 
   def self.fetch_adventures(page)
@@ -51,10 +51,6 @@ class LivingSocial
                   price: price}
   end
 
-  def self.is_adventure?(page)
-    page.root.at_css('div.deal-title')
-  end
-
   def self.save_to_db(adventures)
     puts adventures.first.inspect
     adventures.each do |params|
@@ -77,7 +73,6 @@ class LivingSocial
     agent = Mechanize.new
     adventure_home = agent.get('http://livingsocial.com/adventures')
     adventure_indexes = fetch_index_links adventure_home
-    puts adventure_indexes.count
 
     current_index = adventure_home
     adventures_list = []
@@ -89,14 +84,7 @@ class LivingSocial
       current_index = next_link.click if next_link 
     end
 
-    puts adventures_list.flatten.count
-
     save_to_db(adventures_list.flatten)
-    # doc = Nokogiri::XML.parse(get_data)
-    # entries = doc.search('entry')
-    # if entries.count > 0
-    #   puts at_home_deals(entries)
-    # end
   end
 
   def self.fetch_index_links(page)
@@ -108,19 +96,7 @@ class LivingSocial
       entry.search('deal_type').first.text == "Adventures"
     end
   end
-
-  def self.store_deals(deals)
-    if deals.count > 0
-      Deal.delete_all
-      deals.each do |deal|
-        new_deal = Deal.new()
-        new_deal.attributes = LivingSocialEntryParser.new(deal).as_json
-        new_deal.save
-      end
-    end
-  end
 end
-
 
 namespace :livingsocial do
   task :get_adventures => :environment do
