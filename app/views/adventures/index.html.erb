@@ -6,8 +6,9 @@
 
   <div class="span4">
     <ul id="market_sidebar"><%= render @markets %></ul>
-    <%= select("market", "market_id",  Market.all.collect {|p| [ p.city, p.id, {:'data-lat' => p.latitude, :'data-lng' => p.longitude }] }, {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true,
-
-    }) %>
+    <%= select("market", "market_id", 
+        Market.all.collect {|p| [ p.city, p.id, 
+          {:'data-lat' => p.latitude, :'data-lng' => p.longitude}] }, 
+        {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true }) %>
   </div>
 </div>
