@@ -10,7 +10,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'gmaps4rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-
+gem 'chosen-rails'
 
 
 # Gems used only for assets and not required
