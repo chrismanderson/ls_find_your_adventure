@@ -24,12 +24,17 @@ jQuery ->
       $("#filtered-price").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
       currentPriceFilter.min = ui.values[0]
       currentPriceFilter.max = ui.values[1]
+      Gmaps.map.resetSidebarContent()
       hideAllMarkers()
       visibleMarkers()
+      
     )
 
   $("select").change(->
-    currentFilters = $('select').val()
+    if ($('select').val())
+      currentFilters = $('select').val()
+    else
+      currentFilters = []
     hideAllMarkers()
     visibleMarkers()
     Gmaps.map.adjustMapToBounds()
@@ -41,21 +46,18 @@ jQuery ->
   visibleMarkers = ->
     filtered = Gmaps.map.markers
     filtered = _.reject(filtered, (marker) ->
-      console.log "#{marker.price < currentPriceFilter.max}"
-      marker.price < currentPriceFilter.min || marker.price > currentPriceFilter.max
+      (marker.price < currentPriceFilter.min) || (marker.price > currentPriceFilter.max)
     )
 
-
-    filtered = _.filter(filtered, (marker) ->
-      if currentFilters
+    if (currentFilters.length != 0)
+      filtered = _.filter(filtered, (marker) ->
         _.include(currentFilters, marker.market)
-      else
-        marker
-    )
+      )
 
     console.log "fitler count is #{filtered.length}"
 
     _.each filtered, (marker) ->
+      Gmaps.map.createSidebar marker
       Gmaps.map.showMarker marker
 
   hideAllMarkers = ->

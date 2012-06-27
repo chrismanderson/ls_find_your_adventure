@@ -7,8 +7,11 @@ class AdventuresController < ApplicationController
     @map = @adventures.to_gmaps4rails do |adventure, marker|
       marker.infowindow render_to_string(:partial => "/adventures/infowindow", :locals => { :adventure => adventure})
       marker.title   "#{adventure.title}"
+      marker.sidebar   "#{adventure.title}"
       marker.json({ :market => adventure.market.city, 
-                    :price => adventure.price
+                    :price => adventure.price,
+                    :name => adventure.title,
+                    :description => adventure.description
                   })
     end
 
@@ -18,7 +21,8 @@ class AdventuresController < ApplicationController
       "mapTypeControl" => true,
       "detect_location" => true,
       "center_on_user" => true},
-      "markers" => {"data" => @map}
+      "markers" => {"data" => @map,
+                    "options" => { list_container: 'sidebar_adventure_list'}}
     }
   end
 end
