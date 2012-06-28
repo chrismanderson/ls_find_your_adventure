@@ -1,7 +1,7 @@
 class CreateAdventureDates < ActiveRecord::Migration
   def change
     create_table :adventure_dates do |t|
-      t.date        :date
+      t.datetime        :date
       t.timestamps
     end
   end

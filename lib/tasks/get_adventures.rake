@@ -29,7 +29,8 @@ class LivingSocial
     title = page.root.css(".deal-title h1").text.split(" - ").first.strip
     puts title
     image_url = page.root.at_css('.slide img').attribute('src').value()
-    dates = root.css('#deal-availability li a.cal').map{ |i| i.attr('rel') }.uniq
+    dates = page.root.css('#deal-availability li a.cal').map{ |i| i.attr('rel') }.uniq
+    dates = dates.map { |i| Date.strptime(i, "%m/%d/%Y") }
     buy_url = page.search('link').first.attr('href')
     city = page.root.css(".deal-title p").text.split(%r{\W{2,}})[-2]
     state = page.root.css(".deal-title p").text.split(",")[-1].strip
@@ -62,11 +63,19 @@ class LivingSocial
   def self.save_to_db(adventures)
     puts adventures.first.inspect
     adventures.each do |params|
+      puts params[:title]
+      puts params[:dates]
       db_market = Market.find_or_create_by_city params[:market]
       db_market.latitude = params[:latitude]
       db_market.longitude = params[:longitude]
       db_market.save
+
       db_adventure = Adventure.find_or_initialize_by_title params[:title]
+
+      params[:dates].each do |date|
+        db_adventure.adventure_dates.find_or_create_by_date date
+      end
+
       db_adventure.details = params[:details]
       db_adventure.description = params[:description]
       db_adventure.price = params[:price]

@@ -21,12 +21,50 @@ jQuery.fn.sortElements = (->
 )()
 
 jQuery ->
-  
+
   currentMarketFilters = []
-  currentStatusFilters = []
+  currentDateFilter =
+    start: null
+    end: null
+  currentStatusFilters = 'all'
   currentPriceFilter =
     min: Adventure.min_price
     max: Adventure.max_price
+
+
+  $("#from").datepicker
+    defaultDate: "+1w"
+    changeMonth: true
+    numberOfMonths: 3
+    onSelect: (selectedDate) ->
+      $("#to").datepicker "option", "minDate", selectedDate
+      if datePickerCheck() == true
+        filterDate()
+
+  $("#to").datepicker
+    defaultDate: "+1w"
+    changeMonth: true
+    numberOfMonths: 3
+    onSelect: (selectedDate) ->
+      $("#from").datepicker "option", "maxDate", selectedDate
+      if datePickerCheck() == true
+        filterDate()
+
+  datePickerCheck = ->
+    !($("#to").datepicker("getDate") == null || $("#from").datepicker("getDate") == null)
+
+
+  filterDate = ->
+    console.log "FILTERING"
+    end_date = $("#to").datepicker "getDate"
+    start_date = $("#from").datepicker "getDate"
+    currentDateFilter.start = start_date
+    currentDateFilter.end = end_date
+    console.log $.datepicker.formatDate('mm/dd/yy', start_date)
+    Gmaps.map.resetSidebarContent()
+    hideAllMarkers()
+    visibleMarkers()
+  
 
   $('#sort').on 'click', (event) ->
     $("#sidebar_adventure_list li").sortElements (a, b) ->
@@ -81,6 +119,7 @@ jQuery ->
     
   visibleMarkers = ->
     filtered = Gmaps.map.markers
+    console.log currentStatusFilters
 
     if currentStatusFilters != "all"
       filtered = _.filter(filtered, (marker) ->
@@ -97,6 +136,17 @@ jQuery ->
     if (currentMarketFilters.length != 0)
       filtered = _.filter(filtered, (marker) ->
         _.include(currentMarketFilters, marker.market)
+      )
+
+    if (currentDateFilter.start != null && currentDateFilter.end != null)
+      console.log "FILTERING"
+      filtered = _.filter(filtered, (marker) ->
+        _.any(marker.dates, (date) ->
+          testDate = new Date(date.date)
+          console.log marker.title
+          console.log "testDate: #{testDate} filterStart #{currentDateFilter.start} filterEnd #{currentDateFilter.end}"
+          currentDateFilter.start <= testDate && testDate <= currentDateFilter.end
+        ) 
       )
 
     console.log "fitler count is #{filtered.length}"

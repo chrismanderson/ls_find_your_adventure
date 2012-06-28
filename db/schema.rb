@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20120628191232) do
   end
 
   create_table "adventure_dates", :force => true do |t|
-    t.date     "date"
+    t.datetime "date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
