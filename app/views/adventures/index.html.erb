@@ -1,21 +1,23 @@
-<div class="row-fluid" id="meta-bar">
+<div class="row-fluid navbar navbar-fixed-top" id="meta-bar">
   <div class="span4">
     <div class="btn-group" id="status-toggle" data-toggle="buttons-radio">
-      <button class="btn" value="all">All Deals</button>
+      <button class="btn active" value="all">All Deals</button>
       <button class="btn" value="active">Active</button>
       <button class="btn" value="sold_out">Sold out</button>
     </div>
+  </div>
+
+  <div class="span4">
     <h2><a href="#">Filter By Price</a></h2>
     <div id='price-range'>
     </div>
-      <p>
-        <label for="filtered-rev">Filter by Revenue:</label>
-        <input type="hidden" id="hidden-price" />
-        <div id="filtered-price" ></div>
-      </p>
-    </div>
+    <p>
+      <label for="filtered-rev">Filter by Revenue:</label>
+      <input type="hidden" id="hidden-price" />
+    </p>
+  </div>
 
-  <div class="span8">
+  <div class="span4"><div id="filtered-price" ></div>
     <%= select("market", "market_id", 
         Market.all.collect {|p| [ p.city, p.city, 
           {:'data-lat' => p.latitude, :'data-lng' => p.longitude}] }, 

@@ -28,7 +28,8 @@ class LivingSocial
   def self.parse(page)
     title = page.root.css(".deal-title h1").text.split(" - ").first.strip
     puts title
-    image = page.root.at_css('.slide img').attribute('src').value()
+    image_url = page.root.at_css('.slide img').attribute('src').value()
+    buy_url = page.search('link').first.attr('href')
     city = page.root.css(".deal-title p").text.split(%r{\W{2,}})[-2]
     state = page.root.css(".deal-title p").text.split(",")[-1].strip
     price = page.root.css('.deal-price').text.split(%r{\D})[-1]
@@ -40,7 +41,7 @@ class LivingSocial
     end
     details = page.root.css('.highlights ul li').text.gsub("\n","--")
     market = page.at('.deal-description')['data-market']
-    image
+
     sold_out = element?(page.root.at_css('div.sold-out'))
     expiration = page.root.css('.fine-print p').text.split(%r{\b[A-Z]+\b}).last.strip
     zipcode = page.root.xpath("//br/following-sibling::text()").text.split(" ").last
@@ -52,7 +53,8 @@ class LivingSocial
                   details: details,
                   market: market,
                   price: price,
-                  image: image}
+                  image_url: image_url,
+                  buy_url: buy_url}
   end
 
   def self.save_to_db(adventures)
@@ -69,7 +71,8 @@ class LivingSocial
       db_adventure.market_id = db_market.id
       db_adventure.city = params[:city]
       db_adventure.state = params[:state]
-      db_adventure.image = params[:image]
+      db_adventure.image_url = params[:image_url]
+      db_adventure.buy_url = params[:buy_url]
       db_adventure.zipcode = params[:zipcode]
       db_adventure.sold_out = params[:sold_out]
       db_adventure.latitude = params[:latitude]

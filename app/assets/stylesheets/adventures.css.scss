@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #meta-bar {
-  color: white;
+  color: black;
   background-color: grey;
   height: 75px;
   max-width: 100%;
@@ -34,7 +34,7 @@ ul#sidebar_adventure_list {
     border-bottom: 1px solid black;
 
     .row-fluid {
-      padding: 15px;
+      padding: 15px 0 15px 0;
     }
   }
   li.header {
