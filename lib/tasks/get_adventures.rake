@@ -29,6 +29,7 @@ class LivingSocial
     title = page.root.css(".deal-title h1").text.split(" - ").first.strip
     puts title
     image_url = page.root.at_css('.slide img').attribute('src').value()
+    dates = root.css('#deal-availability li a.cal').map{ |i| i.attr('rel') }.uniq
     buy_url = page.search('link').first.attr('href')
     city = page.root.css(".deal-title p").text.split(%r{\W{2,}})[-2]
     state = page.root.css(".deal-title p").text.split(",")[-1].strip
@@ -54,6 +55,7 @@ class LivingSocial
                   market: market,
                   price: price,
                   image_url: image_url,
+                  dates: dates,
                   buy_url: buy_url}
   end
 
