@@ -1,13 +1,16 @@
-<div class="row-fluid">
+<div class="row-fluid" id="sold_out <%= adventure.sold_out %>">
   <div class="span2">
     <%= image_tag adventure.image, :class => "image-item" %>
   </div>
 
   <div class="span7">
     <h3><%= adventure.title %></h3>
+    <% if adventure.sold_out %>
+      <p id="status">Sold out!</p>
+    <% end %>
   </div>
 
   <div class="span3" id="price_box">
-    <p id="price"><%= number_to_currency(adventure.price, :precision => 0) %></p>
+    <p id="price" data-price=<%= adventure.price %>><%= number_to_currency(adventure.price, :precision => 0) %></p>
   </div>
 </div>

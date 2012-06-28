@@ -7,6 +7,7 @@ class AdventuresController < ApplicationController
       marker.title   "#{adventure.title}"
       marker.sidebar render_to_string(:partial => "/adventures/sidebar", :locals => { :adventure => adventure})
       marker.json({ :market => adventure.market.city, 
+                    :sold_out => adventure.sold_out,
                     :price => adventure.price,
                     :name => adventure.title,
                   })

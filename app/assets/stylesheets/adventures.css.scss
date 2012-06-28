@@ -5,6 +5,7 @@
   color: white;
   background-color: grey;
   height: 75px;
+  max-width: 100%;
 }
 
 #price_box {
@@ -19,10 +20,22 @@
 ul#sidebar_adventure_list {
   list-style-type: none;
   margin-left: 0;
+  background-color: grey;
+
+  p#status {
+    color: red;
+  }
 
   li {
     padding-bottom: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+    height: 60px;
+    border-bottom: 1px solid black;
+
+    .row-fluid {
+      padding: 15px;
+    }
   }
   li.header {
     font-size: 26px;
@@ -34,8 +47,8 @@ ul#sidebar_adventure_list {
   }
 
   li img {
-    clip: rect(0 70px 50px 20px);
-    left: -18px;
+    clip: rect(0 60px 50px 10px);
+    left: -10px;
     position: absolute;
   }
 

@@ -1,5 +1,10 @@
 <div class="row-fluid" id="meta-bar">
   <div class="span4">
+    <div class="btn-group" id="status-toggle" data-toggle="buttons-radio">
+      <button class="btn" value="all">All Deals</button>
+      <button class="btn" value="active">Active</button>
+      <button class="btn" value="sold_out">Sold out</button>
+    </div>
     <h2><a href="#">Filter By Price</a></h2>
     <div id='price-range'>
     </div>
@@ -20,13 +25,14 @@
 
 <div class="row-fluid" id="map_area">
   <div class="span4" id="left_list_area" >
-    <h2>Current adventures</h2>
+    <h2>Sort by</h2>
+    <a id="sort" class="btn">Price</a>
+    <a id="sort_sold_out" class="btn">Sold out?</a>
     <ul id="sidebar_adventure_list">
     </ul>
   </div>
 
   <div class="span8">
-    <h1>Listing adventures</h1>
       <%= gmaps(@gmap_options) %>
   </div>
 
