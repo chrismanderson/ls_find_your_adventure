@@ -1,31 +1,36 @@
-<div class="row">
-  <div class="span6">
-    <h1>Listing adventures</h1>
-      <%= gmaps(@gmap_options) %>
-  </div>
-
-  <div class="span2">
+<div class="row-fluid" id="meta-bar">
+  <div class="span4">
     <h2><a href="#">Filter By Price</a></h2>
-    <div>
-      <div id='price-range'></div>
+    <div id='price-range'>
+    </div>
       <p>
         <label for="filtered-rev">Filter by Revenue:</label>
         <input type="hidden" id="hidden-price" />
         <div id="filtered-price" ></div>
       </p>
     </div>
-    <br>
+
+  <div class="span8">
     <%= select("market", "market_id", 
         Market.all.collect {|p| [ p.city, p.city, 
           {:'data-lat' => p.latitude, :'data-lng' => p.longitude}] }, 
         {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true }) %>
   </div>
+</div>
 
-  <div class="span4">
+<div class="row-fluid" id="map_area">
+  <div class="span4" id="left_list_area" >
     <h2>Current adventures</h2>
     <ul id="sidebar_adventure_list">
     </ul>
   </div>
+
+  <div class="span8">
+    <h1>Listing adventures</h1>
+      <%= gmaps(@gmap_options) %>
+  </div>
+
+  
 </div>
 
 <script type="text/javascript">

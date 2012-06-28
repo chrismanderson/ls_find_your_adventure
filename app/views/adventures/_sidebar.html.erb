@@ -1,3 +1,13 @@
-<%= image_tag adventure.image, :class => "image-item", :height => "40px"  %>
-<h3><%= adventure.title %></h3>
-<h4><%= adventure.price %></h4>
+<div class="row-fluid">
+  <div class="span2">
+    <%= image_tag adventure.image, :class => "image-item" %>
+  </div>
+
+  <div class="span7">
+    <h3><%= adventure.title %></h3>
+  </div>
+
+  <div class="span3" id="price_box">
+    <p id="price"><%= number_to_currency(adventure.price, :precision => 0) %></p>
+  </div>
+</div>

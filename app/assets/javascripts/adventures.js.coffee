@@ -27,7 +27,6 @@ jQuery ->
       Gmaps.map.resetSidebarContent()
       hideAllMarkers()
       visibleMarkers()
-      
     )
 
   $("select").change(->
@@ -35,6 +34,7 @@ jQuery ->
       currentFilters = $('select').val()
     else
       currentFilters = []
+    Gmaps.map.resetSidebarContent()
     hideAllMarkers()
     visibleMarkers()
     Gmaps.map.adjustMapToBounds()
