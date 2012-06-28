@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require jquery.quicksand.js
 //= require twitter/bootstrap
 //= require chosen-jquery
 //= require underscore
