@@ -383,6 +383,7 @@ class @Gmaps4Rails
     if (@markers_conf.list_container)
       ul = document.getElementById(@markers_conf.list_container)
       li = document.createElement('li')
+      li.setAttribute('data-id', marker_container.id)
       aSel = document.createElement('a')
       aSel.href = 'javascript:void(0);'
       html = if marker_container.sidebar? then marker_container.sidebar else "Marker"

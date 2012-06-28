@@ -14,6 +14,7 @@ class AdventuresController < ApplicationController
       marker.json({ :market => adventure.market.city, 
                     :sold_out => adventure.sold_out,
                     :price => adventure.price,
+                    :id => adventure.id,
                     :dates => adventure.adventure_dates,
                     :name => adventure.title
                   })
