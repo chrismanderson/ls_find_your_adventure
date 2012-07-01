@@ -178,7 +178,6 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     marker.serviceObject.setMap(null)
 
   showMarker : (marker) ->
-    console.log marker.serviceObject
     marker.serviceObject.setAnimation(google.maps.Animation.DROP);
     marker.serviceObject.setVisible(true)
 
@@ -187,7 +186,10 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
 
   extendBoundsWithMarkers : ->
     for marker in @markers
-      @boundsObject.extend(marker.serviceObject.position)
+      console.log 'hello'
+      console.log marker
+      if marker.serviceObject.visible == true
+        @boundsObject.extend(marker.serviceObject.position)
 
   #////////////////////////////////////////////////////
   #/////////////////// Clusterer //////////////////////
@@ -261,5 +263,6 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     @serviceObject.fitBounds(@boundsObject) unless @boundsObject.isEmpty()
 
   centerMapOnUser : ->
+    console.log @userLocation
     @serviceObject.setCenter(@userLocation)
 

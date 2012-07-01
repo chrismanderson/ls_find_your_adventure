@@ -411,13 +411,16 @@ class @Gmaps4Rails
 
   #to make the map fit the different LatLng points
   adjustMapToBounds : ->
+    console.log "Called adjustMapToBounds"
     #FIRST_STEP: retrieve all bounds
     #create the bounds object only if necessary
     if @map_options.auto_adjust or @map_options.bounds isnt null
+      console.log "Step two"
       @boundsObject = @createLatLngBounds()
 
       #if autodjust is true, must get bounds from markers polylines etc...
       if @map_options.auto_adjust
+        console.log "Step three"
         #from markers
         @extendBoundsWithMarkers()
 

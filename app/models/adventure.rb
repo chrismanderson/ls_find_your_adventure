@@ -22,6 +22,7 @@ class Adventure < ActiveRecord::Base
     { :market => market.city, 
       :sold_out => sold_out,
       :price => price,
+      :duration => duration,
       :id => id,
       :dates => adventure_dates,
       :name => title

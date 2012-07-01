@@ -7,7 +7,7 @@ class MarketsController < ApplicationController
   end
 
   def nearest
-    closest_market = Market.near([params[:lat], params[:lng]], 10000)
+    closest_market = Market.near([params[:lat], params[:lng]], params[:radius])
     render :json => closest_market
   end
 end

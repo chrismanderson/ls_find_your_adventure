@@ -4,7 +4,7 @@
 #meta-bar {
   color: black;
   background-color: grey;
-  height: 75px;
+  height: 175px;
   max-width: 100%;
 }
 
@@ -78,7 +78,7 @@ ul#sidebar_adventure_list {
 #left_list_area {
   width: 360px;
   position: absolute;
-  top: 75px;
+  top: 175px;
   bottom: 0;
   left: 0;
   overflow: auto;
@@ -86,7 +86,7 @@ ul#sidebar_adventure_list {
 
 .map_container {
   position: absolute;
-  top: 75px;
+  top: 175px;
   left: 360px;
   right: 0;
   bottom: 0;

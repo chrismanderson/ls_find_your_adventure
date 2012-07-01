@@ -15,12 +15,22 @@
   </div>
 
   <div class="span3">
-    
     <h2><a href="#">Filter By Price</a></h2>
     <div id='price-range'>
     </div>
     <p>
       <label for="filtered-rev">Filter by Revenue:</label>
+      <input type="hidden" id="hidden-price" />
+    </p>
+    <div id="filtered-duration" ></div>
+
+
+
+    <h2><a href="#">Filter By Duration</a></h2>
+    <div id='duration-range'>
+    </div>
+    <p>
+      <label for="filtered-rev">Filter by duration:</label>
       <input type="hidden" id="hidden-price" />
     </p>
   </div>
@@ -38,6 +48,7 @@
     <h2>Sort by</h2>
     <a id="sort" class="btn">Price</a>
     <a id="sort_sold_out" class="btn">Sold out?</a>
+    <a id="sort_duration" class="btn">Duration</a>
     <ul id="sidebar_adventure_list">
     </ul>
   </div>

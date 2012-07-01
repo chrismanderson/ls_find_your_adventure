@@ -13,4 +13,6 @@
   <div class="span3" id="price_box">
     <p id="price" data-price=<%= adventure.price %>><%= number_to_currency(adventure.price, :precision => 0) %></p>
   </div>
+
+    <p id="duration" data-duration=<%= to_minutes(adventure.duration) %>><%= number_with_precision(adventure.duration, :precision => 2, :significant => true, :strip_insignificant_zeros => true) %> hours</p>
 </div>
