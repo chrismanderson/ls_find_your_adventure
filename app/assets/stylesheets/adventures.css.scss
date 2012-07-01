@@ -14,15 +14,6 @@
   }
 }
 
-#price_box {
-  p {
-    text-align: center;
-    color: green;
-    font-size: 1.7em;
-    font-weight: 900;
-  }
-}
-
 .ui-slider {
   width: 50%;
 }
@@ -40,21 +31,50 @@ input.hasDatepicker {
   width: 35%;
 }
 
+#left_list_area {
+  width: 358px;
+  position: absolute;
+  @include single-box-shadow;
+  top: 175px;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  @include background(
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px); 
+  background-color:#282828;
+  background-size:16px 16px;
+}
+
+
 ul#sidebar_adventure_list {
   list-style-type: none;
   margin-left: 0;
-  background-color: grey;
+  text-shadow: white 0px 1px 0px;
 
+
+
+
+  a {
+    text-decoration: none;
+  }
   p#status {
     color: red;
   }
 
   li {
-    padding-bottom: 20px;
-    
     @include background-image(linear-gradient(#ffffff, #ededed));
     @include single-box-shadow;
-    height: 60px;
+    padding-left: 10px;
+    font-size: 16px;
+
+    span {
+      font-style: italic;
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
 
 
     .row-fluid {
@@ -66,18 +86,27 @@ ul#sidebar_adventure_list {
     font-weight: 700;
     margin-bottom: 10px;
   }
+
+  #price_box {
+    p {
+      color: #59be17;
+      font-size: 1.5em;
+      font-weight: 600;
+  }
+}
   li:hover {
-    @include background-image(linear-gradient(red, #ededed));
+    @include background-image(linear-gradient(#ededed, rgba(166,166,166,1)));
   }
 
   li img {
-    clip: rect(0 60px 50px 10px);
-    left: -10px;
+    clip: rect(0 60px 50px 5px);
+    left: -5px;
     position: absolute;
+    @include border-radius(4px);
   }
 
   li h3 {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1em;
   }
 
@@ -97,15 +126,6 @@ ul#sidebar_adventure_list {
   bottom: 0;
   right: 0;
   left: 0;
-}
-
-#left_list_area {
-  width: 360px;
-  position: absolute;
-  top: 175px;
-  bottom: 0;
-  left: 0;
-  overflow: auto;
 }
 
 .map_container {
