@@ -1,4 +1,6 @@
 class AdventuresController < ApplicationController
+  include AdventureMap
+
   def index
     @adventures = Adventure.all
     @markets = Market.all
@@ -20,14 +22,9 @@ class AdventuresController < ApplicationController
                   })
     end
 
-    @gmap_options = {"map_options" => {
-      "auto_zoom" => true,
-      "auto_adjust" => true,
-      "mapTypeControl" => true,
-      "detect_location" => true,
-      "center_on_user" => true},
+    @gmap_options = {"map_options" => AdventureMap.map_options,
       "markers" => {"data" => @map,
-                    "options" => { list_container: 'sidebar_adventure_list'}}
+                    "options" => AdventureMap.marker_options}
     }
   end
 end
