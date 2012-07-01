@@ -1,5 +1,5 @@
 <div class="row-fluid navbar navbar-fixed-top" id="meta-bar">
-  <div class="span3">
+  <div class="span4">
     <h1>City?</h1>
         <%= select("market", "market_id", 
         Market.all.collect {|p| [ p.city, p.city, 
@@ -7,45 +7,45 @@
         {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true }) %>
   </div>
 
-  <div class="span3">
-    <h1>Date?</h1>
+  <div class="span4">
+    <div id="datepicker-box"><h1>Date?</h1>
     <label for="from">From</label>
-      <input type="text" id="from" name="from"/>
-      <input type="text" id="to" name="to"/>
+    <input type="text" id="from" name="from"/>
+    <label for="from">To</label>
+    <input type="text" id="to" name="to"/>
+  </div>
   </div>
 
-  <div class="span3">
-    <h2><a href="#">Filter By Price</a></h2>
+  <div class="span4">
+    <h1>Price?</h1><div id="filtered-price" ></div>
     <div id='price-range'>
     </div>
     <p>
-      <label for="filtered-rev">Filter by Revenue:</label>
       <input type="hidden" id="hidden-price" />
     </p>
-    <div id="filtered-duration" ></div>
+    
 
 
 
-    <h2><a href="#">Filter By Duration</a></h2>
+    <h1>Length?</h1><div id="filtered-duration"></div>
     <div id='duration-range'>
     </div>
     <p>
-      <label for="filtered-rev">Filter by duration:</label>
       <input type="hidden" id="hidden-price" />
     </p>
   </div>
 
-  <div class="span3"><div id="filtered-price" ></div>
-<div class="btn-group" id="status-toggle" data-toggle="buttons-radio">
-      <button class="btn active" value="all">All Deals</button>
-      <button class="btn" value="active">Active</button>
-      <button class="btn" value="sold_out">Sold out</button>
-    </div>
+  <div class="span3">
   </div>
 </div>
 
 <div class="row-fluid" id="map_area">
   <div class="span4" id="left_list_area" >
+    <div class="btn-group" id="status-toggle" data-toggle="buttons-radio">
+      <button class="btn active" value="all">All Deals</button>
+      <button class="btn" value="active">Active</button>
+      <button class="btn" value="sold_out">Sold out</button>
+    </div>
     <h2>Sort by</h2>
     <a id="sort_price" class="btn">Price</a>
     <a id="sort_sold_out" class="btn">Sold out?</a>

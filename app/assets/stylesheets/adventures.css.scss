@@ -3,10 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #meta-bar {
   color: black;
+  padding: 10px 10px 10px 10px;
   @include background-image(linear-gradient(#ffffff, #ededed));
-  height: 175px;
+  height: 125px;
   max-width: 100%;
   @include single-box-shadow;
+
+  h1 {
+    font-size: 20px;
+  }
 }
 
 #price_box {
@@ -16,6 +21,23 @@
     font-size: 1.7em;
     font-weight: 900;
   }
+}
+
+.ui-slider {
+  width: 50%;
+}
+
+.chzn-select {
+  width: 90%;
+}
+
+#datepicker-box {
+  label {
+    display: inline;
+  }
+}
+input.hasDatepicker {
+  width: 35%;
 }
 
 ul#sidebar_adventure_list {
@@ -29,10 +51,11 @@ ul#sidebar_adventure_list {
 
   li {
     padding-bottom: 20px;
-    margin-bottom: 10px;
-    background-color: white;
+    
+    @include background-image(linear-gradient(#ffffff, #ededed));
+    @include single-box-shadow;
     height: 60px;
-    border-bottom: 1px solid black;
+
 
     .row-fluid {
       padding: 15px 0 15px 0;
@@ -44,7 +67,7 @@ ul#sidebar_adventure_list {
     margin-bottom: 10px;
   }
   li:hover {
-    background-color: red;
+    @include background-image(linear-gradient(red, #ededed));
   }
 
   li img {

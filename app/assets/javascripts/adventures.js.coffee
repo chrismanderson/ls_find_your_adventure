@@ -97,6 +97,7 @@ jQuery ->
 
   $( "#filtered-rev" ).val( "$" + Adventure.min_price + " - $" + Adventure.max_price )
 
+  $("#filtered-duration").html "2 hours - 12 hours"
   $('#duration-range').slider(
     range: true,
     animate: true,
@@ -105,7 +106,7 @@ jQuery ->
     max: 12,
     values: [ 0, 12 ]
     slide: (event, ui) ->
-      $("#filtered-price").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
+      $("#filtered-duration").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
       currentDurationFilter.min = ui.values[0]
       currentDurationFilter.max = ui.values[1]
       Gmaps.map.resetSidebarContent()
