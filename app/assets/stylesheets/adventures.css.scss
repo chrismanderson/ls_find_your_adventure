@@ -3,9 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #meta-bar {
   color: black;
-  @include background-image(linear-gradient(#5c5c5c, #111111));
+  @include background-image(linear-gradient(#ffffff, #ededed));
   height: 175px;
   max-width: 100%;
+  @include single-box-shadow;
 }
 
 #price_box {

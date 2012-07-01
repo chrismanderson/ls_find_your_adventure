@@ -30,7 +30,7 @@ jQuery ->
   $("#from").datepicker
     defaultDate: "+1w"
     changeMonth: true
-    numberOfMonths: 3
+    numberOfMonths: 1
     onSelect: (selectedDate) ->
       $("#to").datepicker "option", "minDate", selectedDate
       if datePickerCheck() == true
@@ -39,7 +39,7 @@ jQuery ->
   $("#to").datepicker
     defaultDate: "+1w"
     changeMonth: true
-    numberOfMonths: 3
+    numberOfMonths: 1
     onSelect: (selectedDate) ->
       $("#from").datepicker "option", "maxDate", selectedDate
       if datePickerCheck() == true
