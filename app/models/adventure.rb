@@ -28,4 +28,9 @@ class Adventure < ActiveRecord::Base
       :name => title
     }
   end
+
+  def image_url_with_size size
+    url = self.image_url.split(%r{[^\/]+$}).first
+    "#{url}#{size}_q50.jpg"
+  end
 end

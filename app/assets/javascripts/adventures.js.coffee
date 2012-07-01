@@ -70,6 +70,7 @@ jQuery ->
       setTimeout(fetchUserLocation, 2000);
 
   Gmaps.map.callback = ->
+    Gmaps.map.adjustMapToBounds()
     fetchUserLocation()
 
   alertMarkets = (userLocation) ->

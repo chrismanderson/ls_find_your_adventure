@@ -19,7 +19,7 @@
 }
 
 .chzn-select {
-  width: 90%;
+  width: 95%;
 }
 
 #datepicker-box {
@@ -67,7 +67,6 @@ ul#sidebar_adventure_list {
   li {
     @include background-image(linear-gradient(#ffffff, #ededed));
     @include single-box-shadow;
-    padding-left: 10px;
     font-size: 16px;
 
     span {

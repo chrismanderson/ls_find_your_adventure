@@ -50,7 +50,7 @@ class LivingSocial
       latitude = lat_long.split(",")[0].strip
       longitude = lat_long.split(",")[1].strip
     end
-    details = page.root.css('.highlights ul li').text.gsub("\n","--")
+    details = page.root.at_css('.highlights ul').inner_html.gsub("\n","")
     market = page.at('.deal-description')['data-market']
 
     sold_out = element?(page.root.at_css('div.sold-out'))
