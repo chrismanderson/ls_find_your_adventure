@@ -2,29 +2,21 @@ class AdventuresController < ApplicationController
   include AdventureMap
 
   def index
-    @adventures = Adventure.all
     @markets = Market.all
-    @map = @adventures.to_gmaps4rails do |adventure, marker|
-      marker.infowindow render_to_string(:partial => "/adventures/infowindow", :locals => { :adventure => adventure})
+    @map = Adventure.all.to_gmaps4rails do |adventure, marker|
+      marker.infowindow render_meta(adventure, "infowindow")
       marker.title   "#{adventure.title}"
-      marker.picture({
-        :picture => "https://dl.dropbox.com/u/575197/default_#{adventure.sold_out}.png",
-        :width => 32,
-        :height => 37
-      })
-      marker.sidebar render_to_string(:partial => "/adventures/sidebar", :locals => { :adventure => adventure})
-      marker.json({ :market => adventure.market.city, 
-                    :sold_out => adventure.sold_out,
-                    :price => adventure.price,
-                    :id => adventure.id,
-                    :dates => adventure.adventure_dates,
-                    :name => adventure.title
-                  })
+      marker.picture AdventureMap.marker_picture_options adventure.sold_out
+      marker.sidebar render_meta(adventure, "sidebar")
+      marker.json adventure.to_gmaps_json
     end
+    @gmap_options = AdventureMap.create_map @map
+  end
 
-    @gmap_options = {"map_options" => AdventureMap.map_options,
-      "markers" => {"data" => @map,
-                    "options" => AdventureMap.marker_options}
-    }
+  private
+
+  def render_meta(adventure, type)
+    render_to_string :partial => "/adventures/#{type}", 
+                     :locals => { :adventure => adventure}
   end
 end

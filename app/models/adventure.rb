@@ -17,4 +17,14 @@ class Adventure < ActiveRecord::Base
   def self.min_price
     Adventure.minimum('price') 
   end
+
+  def to_gmaps_json
+    { :market => market.city, 
+      :sold_out => sold_out,
+      :price => price,
+      :id => id,
+      :dates => adventure_dates,
+      :name => title
+    }
+  end
 end
