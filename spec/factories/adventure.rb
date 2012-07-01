@@ -5,7 +5,7 @@ FactoryGirl.define do
     market 
     sold_out  false
     latitude  40.000
-    longitude -40.00
+    longitude 40.000
     price     10.0
     duration  5.0
     sequence(:title) {|n| "title#{n}"} 

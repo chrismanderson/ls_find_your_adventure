@@ -238,6 +238,7 @@ DEPENDENCIES
   launchy
   mechanize
   nokogiri
+  rack-test
   rails (= 3.2.6)
   rspec-rails
   sass-rails (~> 3.2.3)

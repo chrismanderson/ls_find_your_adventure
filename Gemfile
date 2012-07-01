@@ -31,7 +31,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'rspec-rails'
+  gem 'rack-test', :require => "rack/test" 
   gem 'capybara'
   gem 'launchy'
   gem 'guard'

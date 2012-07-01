@@ -1,7 +1,13 @@
 require 'spec_helper'
 
+include Geocoding
+
 describe Adventure do
-  let!(:adventure) { FactoryGirl.create(:adventure) }
+  let(:adventure) { FactoryGirl.create(:adventure) }
+
+  before do
+    Geocoding.stub_geocoding
+  end
 
   describe "#to_gmaps_json" do
     it "produces a hash" do
@@ -35,7 +41,7 @@ describe Adventure do
 
     describe ".min_price" do
       it "returns the lowest price amoung adventures" do
-        Adventure.min_price.should == adventure.price
+        Adventure.min_price.should == adventure2.price
       end
     end
   end
