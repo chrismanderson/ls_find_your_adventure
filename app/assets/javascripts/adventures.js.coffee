@@ -77,6 +77,23 @@ jQuery ->
 
   alertMarkets = (markets) ->
     console.log markets
+    $.get "/markets/nearest",
+      lat: Gmaps.map.userLocation.lat()
+      lng: Gmaps.map.userLocation.lng()
+      radius: 500
+    , (data) ->
+        console.log "Data Loaded: " + data[0].city
+        console.log data[1].city
+        $("select").val([data[0].city, data[1].city])
+        $("select").trigger("liszt:updated");
+        if ($('select').val())
+          currentMarketFilters = $('select').val()
+        else
+          currentMarketFilters = []
+        Gmaps.map.resetSidebarContent()
+        hideAllMarkers()
+        visibleMarkers()
+        Gmaps.map.adjustMapToBounds()
 
 
   $("#status-toggle .btn").click ->
@@ -105,7 +122,7 @@ jQuery ->
       visibleMarkers()
     )
 
-  $("select").change(->
+  $("select").chosen().change(->
     if ($('select').val())
       currentMarketFilters = $('select').val()
     else
