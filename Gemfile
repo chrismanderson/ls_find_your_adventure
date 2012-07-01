@@ -7,6 +7,7 @@ gem 'rails', '3.2.6'
 
 gem 'sqlite3'
 gem 'nokogiri'
+gem 'geocoder'
 gem 'mechanize'
 gem 'gmaps4rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

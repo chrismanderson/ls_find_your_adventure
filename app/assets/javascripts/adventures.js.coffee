@@ -56,7 +56,27 @@ jQuery ->
     $("#sidebar_adventure_list li").sortElements (a, b) ->
       (if $(a).find('#status').length > $(b).find('#status').length then 1 else -1)
   
+  checkUserLocation = ->
+    if (Gmaps.map.userLocation != null)
+      loadMarkets()
+      console.log Gmaps.map.userLocation.lng()
+      console.log Gmaps.map.userLocation.lat()
+      Gmaps.map.createMarker
+        Lat: Gmaps.map.userLocation.lat()
+        Lng: Gmaps.map.userLocation.lng()
+        rich_marker: null
+        marker_picture: ""
+    else
+      setTimeout(checkUserLocation, 2000);
+
   Gmaps.map.callback = ->
+    checkUserLocation()
+
+  loadMarkets = ->
+    $.getJSON('/markets.json', alertMarkets)
+
+  alertMarkets = (markets) ->
+    console.log markets
 
 
   $("#status-toggle .btn").click ->

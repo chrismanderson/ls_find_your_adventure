@@ -1,5 +1,10 @@
 FindYourAdventure::Application.routes.draw do
+  match "markets/nearest" => 'markets#nearest'
+  
   resources :adventures
+  resources :markets
+
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

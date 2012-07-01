@@ -73,6 +73,7 @@ GEM
       factory_girl (~> 3.4.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
+    geocoder (1.1.2)
     gmaps4rails (1.5.2)
     growl (1.0.3)
     guard (1.2.1)
@@ -209,6 +210,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  geocoder
   gmaps4rails
   growl
   guard
