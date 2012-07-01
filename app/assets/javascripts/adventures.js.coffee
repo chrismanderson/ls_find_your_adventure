@@ -74,7 +74,7 @@ jQuery ->
     fetchUserLocation()
 
   alertMarkets = (userLocation) ->
-    $.get "/markets/nearest",
+    $.get "/api/v1/markets/nearest",
       lat: userLocation.lat()
       lng: userLocation.lng()
       radius: 500
