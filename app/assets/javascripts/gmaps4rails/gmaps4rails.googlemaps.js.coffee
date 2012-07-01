@@ -178,6 +178,8 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     marker.serviceObject.setMap(null)
 
   showMarker : (marker) ->
+    console.log marker.serviceObject
+    marker.serviceObject.setAnimation(google.maps.Animation.DROP);
     marker.serviceObject.setVisible(true)
 
   hideMarker : (marker) ->

@@ -25,10 +25,19 @@ class LivingSocial
     dummy
   end
 
+  def self.parse_duration page
+    if page.at('.highlights p')
+      page.at('.highlights p').text.split(" ")[1]
+    else
+      page.root.xpath('//div/h2[2]/following-sibling::text()').text.match(/[0-9|\.]+/)[0]
+    end
+  end
+
   def self.parse(page)
     title = page.root.css(".deal-title h1").text.split(" - ").first.strip
     puts title
     image_url = page.root.at_css('.slide img').attribute('src').value()
+    duration = parse_duration page
     dates = page.root.css('#deal-availability li a.cal').map{ |i| i.attr('rel') }.uniq
     dates = dates.map { |i| Date.strptime(i, "%m/%d/%Y") }
     buy_url = page.search('link').first.attr('href')
@@ -54,6 +63,7 @@ class LivingSocial
                   longitude: longitude,
                   details: details,
                   market: market,
+                  duration: duration,
                   price: price,
                   image_url: image_url,
                   dates: dates,
@@ -82,6 +92,7 @@ class LivingSocial
       db_adventure.market_id = db_market.id
       db_adventure.city = params[:city]
       db_adventure.state = params[:state]
+      db_adventure.duration = params[:duration]
       db_adventure.image_url = params[:image_url]
       db_adventure.buy_url = params[:buy_url]
       db_adventure.zipcode = params[:zipcode]

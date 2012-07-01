@@ -6,6 +6,7 @@ class CreateAdventures < ActiveRecord::Migration
       t.string      :address
       t.string      :city
       t.string      :state
+      t.decimal     :duration
       t.string      :buy_url
       t.string      :image_url
       t.integer     :zipcode
