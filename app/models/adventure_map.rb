@@ -27,7 +27,7 @@ module AdventureMap
       "map_options" => map_options,
       "markers" => { "data" => map,
                      "options" => marker_options 
-                   }
+            }
     }
   end
 end
