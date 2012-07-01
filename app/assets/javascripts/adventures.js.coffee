@@ -3,7 +3,16 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  initializeSorter = (params) ->
+    _.each params, (param) ->
+      $("#sort_#{param}").on 'click', (event) ->
+        $("#sidebar_adventure_list li").sortElements (a, b) ->
+          (if $(a).find("##{param}").data("#{param}") > $(b).find("##{param}").data("#{param}") then 1 else -1)
 
+
+  initializeSorter ["duration","price"]
+  $(".chzn-select").chosen()
+  
   currentMarketFilters = []
   currentDateFilter =
     start: null
@@ -48,41 +57,25 @@ jQuery ->
     Gmaps.map.resetSidebarContent()
     hideAllMarkers()
     visibleMarkers()
-  
 
-  $('#sort').on 'click', (event) ->
-    $("#sidebar_adventure_list li").sortElements (a, b) ->
-      (if $(a).find('#price').data('price') > $(b).find('#price').data('price') then 1 else -1)
 
   $('#sort_sold_out').on 'click', (event) ->
     $("#sidebar_adventure_list li").sortElements (a, b) ->
       (if $(a).find('#status').length > $(b).find('#status').length then 1 else -1)
 
-  $('#sort_duration').on 'click', (event) ->
-    $("#sidebar_adventure_list li").sortElements (a, b) ->
-      (if $(a).find('#duration').data('duration') > $(b).find('#duration').data('duration')  then 1 else -1)
-  
-  checkUserLocation = ->
+  fetchUserLocation = ->
     if (Gmaps.map.userLocation != null)
-      loadMarkets()
-      Gmaps.map.createMarker
-        Lat: Gmaps.map.userLocation.lat()
-        Lng: Gmaps.map.userLocation.lng()
-        rich_marker: null
-        marker_picture: ""
+      alertMarkets Gmaps.map.userLocation
     else
-      setTimeout(checkUserLocation, 2000);
+      setTimeout(fetchUserLocation, 2000);
 
   Gmaps.map.callback = ->
-    checkUserLocation()
+    fetchUserLocation()
 
-  loadMarkets = ->
-    $.getJSON('/markets.json', alertMarkets)
-
-  alertMarkets = (markets) ->
+  alertMarkets = (userLocation) ->
     $.get "/markets/nearest",
-      lat: Gmaps.map.userLocation.lat()
-      lng: Gmaps.map.userLocation.lng()
+      lat: userLocation.lat()
+      lng: userLocation.lng()
       radius: 500
     , (data) ->
         $("select").val([data[0].city, data[1].city])
@@ -94,8 +87,6 @@ jQuery ->
         Gmaps.map.resetSidebarContent()
         hideAllMarkers()
         visibleMarkers()
-        Gmaps.map.adjustMapToBounds()
-
 
   $("#status-toggle .btn").click ->
     val = $(this).val();
@@ -103,8 +94,6 @@ jQuery ->
     Gmaps.map.resetSidebarContent()
     hideAllMarkers()
     visibleMarkers()
-  
-  $(".chzn-select").chosen()
 
   $( "#filtered-rev" ).val( "$" + Adventure.min_price + " - $" + Adventure.max_price )
 

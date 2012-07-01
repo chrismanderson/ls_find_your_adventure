@@ -186,8 +186,6 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
 
   extendBoundsWithMarkers : ->
     for marker in @markers
-      console.log 'hello'
-      console.log marker
       if marker.serviceObject.visible == true
         @boundsObject.extend(marker.serviceObject.position)
 
