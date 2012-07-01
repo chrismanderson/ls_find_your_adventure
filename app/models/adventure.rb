@@ -4,8 +4,6 @@ class Adventure < ActiveRecord::Base
   has_many :adventure_date_items
   has_many :adventure_dates, :through => :adventure_date_items
 
-  # attr_accessible :title, :body
-
   def gmaps4rails_address
     "#{self.latitude}, #{self.longitude}"
   end
