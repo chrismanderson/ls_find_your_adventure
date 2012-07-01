@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :adventure_date do
+    date Date.today
   end
 end

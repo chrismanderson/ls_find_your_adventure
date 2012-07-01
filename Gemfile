@@ -36,6 +36,8 @@ group :development, :test do
   gem 'launchy'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'simplecov', :require => false
   gem 'growl'
   gem 'factory_girl_rails'
 end
