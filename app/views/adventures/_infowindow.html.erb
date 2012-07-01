@@ -12,7 +12,8 @@
     <p id="price_box"><%= number_to_currency(adventure.price, :precision => 0) %></p>
     <%= link_to "Buy deal", adventure.buy_url, :class => "btn btn-primary btn-large" %>
     <div id="available_dates">
-      <%= adventure.adventure_dates %>
+      <%= render :partial => "/adventure_dates/date_list", 
+                     :locals => { :dates => adventure.adventure_dates} %>
     </div>
   </div>
 

@@ -1,0 +1,11 @@
+<ul>
+
+<% AdventureDate.group_by_month(dates).each do |monthname, posts| %>
+<li><%= monthname %></li>
+<li>
+  <% posts.each do |post| %>
+   <%= post.date.strftime("%d") %> | 
+  <% end %>
+</li>
+<% end %>
+</ul>
