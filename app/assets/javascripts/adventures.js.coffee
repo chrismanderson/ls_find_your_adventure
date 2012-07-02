@@ -5,6 +5,7 @@ initializeSorter = (params) ->
           (if $(a).find("##{param}").data("#{param}") > $(b).find("##{param}").data("#{param}") then 1 else -1)
 
 jQuery ->
+
   # Establishing some filter constants
   currentMarketFilters = []
   currentDateFilter =
@@ -19,6 +20,12 @@ jQuery ->
     max: 12
 
   # starting up 
+  if document.cookie.search(/(^|;)visited=/) > -1
+    console.log "Already visited."
+  else
+    document.cookie = "visited=true;max-age=" + 60 * 60 * 24 * 10
+    $('#myModal').modal('show')
+
   initializeSorter(["duration","price"])
   $("#filtered-duration").html "2 hours - 12 hours"
   $(".chzn-select").chosen()
@@ -75,7 +82,7 @@ jQuery ->
     else
       runFilters()
 
-  Gmaps.map.callback = ->
+  Gmaps.map.callback = ->  
     Gmaps.map.adjustMapToBounds()
     fetchUserLocation()
 
