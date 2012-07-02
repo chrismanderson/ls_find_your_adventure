@@ -29,6 +29,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test do
+  gem 'capybara-webkit'
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'rack-test', :require => "rack/test" 

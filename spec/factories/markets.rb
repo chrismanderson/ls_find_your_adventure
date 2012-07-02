@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :market do
-    city "MyString"
+    sequence(:city) {|n| "market#{n}"} 
   end
 end

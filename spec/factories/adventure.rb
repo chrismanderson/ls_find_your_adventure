@@ -6,6 +6,7 @@ FactoryGirl.define do
     sold_out  false
     latitude  40.000
     longitude 40.000
+    details "<li>Stuff here</li>"
     price     10.0
     duration  5.0
     sequence(:title) {|n| "title#{n}"} 
