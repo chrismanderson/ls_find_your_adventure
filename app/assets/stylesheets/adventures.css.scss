@@ -14,6 +14,10 @@
   }
 }
 
+h1 {
+  font-weight: 600;
+}
+
 #slider-box {
 
 }
@@ -38,13 +42,18 @@
 
 .info_window {
   #available_dates {
-  ul {
-    margin-left: 0px;
-    margin-top: 10px;
-    li {
-      list-style-type: none;
+    ul {
+      margin-left: 0px;
+      margin-top: 10px;
+      li {
+        list-style-type: none;
+      }
     }
   }
+
+  h3 {
+    line-height: 1.1em;
+    padding: 8px 0px 14px 0;
   }
 
   #date_heading {
@@ -53,13 +62,9 @@
 
   p#price_box {
     color: #59be17;
-    font-size: 1.5em;
+    font-size: 1.7em;
     font-weight: 600;
   }
-
-
-
-
 }
 
 #slider-box {

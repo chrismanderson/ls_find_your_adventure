@@ -24,6 +24,16 @@ jQuery ->
   $(".chzn-select").chosen()
   $( "#filtered-price").html( "$" + Adventure.min_price + " - $" + Adventure.max_price )
   
+  filterCalendar = ->
+    end_date = $("#to").datepicker "getDate"
+    start_date = $("#from").datepicker "getDate"
+    console.log end_date
+    console.log start_date
+    console.log "filterDate"
+    currentDateFilter.start = start_date
+    currentDateFilter.end = end_date
+    runFilters()
+
   # datepicker methods
   $("#from").datepicker
     defaultDate: "+1w"
@@ -32,7 +42,7 @@ jQuery ->
     onSelect: (selectedDate) ->
       $("#to").datepicker "option", "minDate", selectedDate
       if datePickerCheck() == true
-        filterDate()
+        filterCalendar()
 
   $("#to").datepicker
     defaultDate: "+1w"
@@ -41,17 +51,11 @@ jQuery ->
     onSelect: (selectedDate) ->
       $("#from").datepicker "option", "maxDate", selectedDate
       if datePickerCheck() == true
-        filterDate()
+        filterCalendar()
 
   datePickerCheck = ->
     !($("#to").datepicker("getDate") == null || $("#from").datepicker("getDate") == null)
 
-  filterDate = ->
-    end_date = $("#to").datepicker "getDate"
-    start_date = $("#from").datepicker "getDate"
-    currentDateFilter.start = start_date
-    currentDateFilter.end = end_date
-    runFilters()
 
   # sorters
   $('#sort_sold_out').on 'click', (event) ->
@@ -159,7 +163,10 @@ jQuery ->
     )
 
   filterDate = (markers) ->
-    _.filter(filtered, (marker) ->
+    console.log "filtering the dates"
+    console.log currentDateFilter.start
+    console.log currentDateFilter.end
+    _.filter(markers, (marker) ->
       _.any(marker.dates, (date) ->
         testDate = new Date(date.date)
         currentDateFilter.start <= testDate && testDate <= currentDateFilter.end

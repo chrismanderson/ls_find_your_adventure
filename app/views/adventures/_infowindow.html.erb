@@ -1,7 +1,7 @@
 <div class="info_window">
 <div class="row-fluid">
   <div class="span12">
-    <%= image_tag adventure.image_url_with_size(350), :class => "image-item" %>
+    <%= image_tag adventure.image_url_with_size(400), :class => "image-item" %>
     <h3><%= adventure.title %></h3>
     
   </div>
@@ -11,13 +11,13 @@
   <div class="span4">
     <p id="price_box"><%= number_to_currency(adventure.price, :precision => 0) %></p>
     <% unless adventure.sold_out %>
-    <%= link_to "Buy deal", adventure.buy_url, :class => "btn btn-primary btn-large" %>
+    <%= link_to "Buy deal", adventure.buy_url, :class => "btn btn-warning btn-large" %>
     <div id="available_dates">
       <%= render :partial => "/adventure_dates/date_list", 
                      :locals => { :dates => adventure.adventure_dates} %>
     </div>
     <% else %>
-    <%= link_to "Sold out", adventure.buy_url, :class => "btn btn-primary btn-large disabled" %>
+    <%= link_to "Sold out", adventure.buy_url, :class => "btn btn-warning btn-large disabled" %>
     <%= link_to "View expired deal", adventure.buy_url, :class => "expired_url" %>
     <% end %>
   </div>

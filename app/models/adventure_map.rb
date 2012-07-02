@@ -23,7 +23,7 @@ module AdventureMap
   end
 
   def self.info content
-    "<div style='width: 350px'>#{content}</div>"
+    "<div style='width: 400px'>#{content}</div>"
   end
 
   def self.create_map map
