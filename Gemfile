@@ -5,7 +5,6 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'mechanize'
@@ -33,6 +32,10 @@ group :test do
   gem 'capybara-webkit'
 end
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'rack-test', :require => "rack/test" 
@@ -42,6 +45,7 @@ group :development, :test do
   gem 'cane'
   gem 'reek'
   gem 'guard-rspec'
+  gem 'sqlite3'
   gem 'guard-spork'
   gem 'simplecov', :require => false
   gem 'growl'
