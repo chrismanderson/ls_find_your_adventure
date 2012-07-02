@@ -1,18 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
-jQuery ->
-  initializeSorter = (params) ->
+initializeSorter = (params) ->
     _.each params, (param) ->
       $("#sort_#{param}").on 'click', (event) ->
         $("#sidebar_adventure_list li").sortElements (a, b) ->
           (if $(a).find("##{param}").data("#{param}") > $(b).find("##{param}").data("#{param}") then 1 else -1)
 
-
-  initializeSorter ["duration","price"]
-  $(".chzn-select").chosen()
+jQuery ->
   
+  # Establishing some filter constants
   currentMarketFilters = []
   currentDateFilter =
     start: null
@@ -21,12 +15,17 @@ jQuery ->
   currentPriceFilter =
     min: Adventure.min_price
     max: Adventure.max_price
-
   currentDurationFilter =
     min: 0
     max: 12
 
-
+  # starting up 
+  initializeSorter(["duration","price"])
+  $("#filtered-duration").html "2 hours - 12 hours"
+  $(".chzn-select").chosen()
+  $( "#filtered-rev" ).val( "$" + Adventure.min_price + " - $" + Adventure.max_price )
+  
+  # datepicker methods
   $("#from").datepicker
     defaultDate: "+1w"
     changeMonth: true
@@ -48,21 +47,19 @@ jQuery ->
   datePickerCheck = ->
     !($("#to").datepicker("getDate") == null || $("#from").datepicker("getDate") == null)
 
-
   filterDate = ->
     end_date = $("#to").datepicker "getDate"
     start_date = $("#from").datepicker "getDate"
     currentDateFilter.start = start_date
     currentDateFilter.end = end_date
-    Gmaps.map.resetSidebarContent()
-    hideAllMarkers()
-    visibleMarkers()
+    runFilters()
 
-
+  # sorters
   $('#sort_sold_out').on 'click', (event) ->
     $("#sidebar_adventure_list li").sortElements (a, b) ->
       (if $(a).find('#status').length > $(b).find('#status').length then 1 else -1)
 
+  # detecting user location
   fetchUserLocation = ->
     if (Gmaps.map.userLocation != null)
       alertMarkets Gmaps.map.userLocation
@@ -85,20 +82,13 @@ jQuery ->
           currentMarketFilters = $('select').val()
         else
           currentMarketFilters = []
-        Gmaps.map.resetSidebarContent()
-        hideAllMarkers()
-        visibleMarkers()
+        runFilters()
 
   $("#status-toggle .btn").click ->
     val = $(this).val();
     currentStatusFilters = val
-    Gmaps.map.resetSidebarContent()
-    hideAllMarkers()
-    visibleMarkers()
+    runFilters()
 
-  $( "#filtered-rev" ).val( "$" + Adventure.min_price + " - $" + Adventure.max_price )
-
-  $("#filtered-duration").html "2 hours - 12 hours"
   $('#duration-range').slider(
     range: true,
     animate: true,
@@ -110,9 +100,7 @@ jQuery ->
       $("#filtered-duration").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
       currentDurationFilter.min = ui.values[0]
       currentDurationFilter.max = ui.values[1]
-      Gmaps.map.resetSidebarContent()
-      hideAllMarkers()
-      visibleMarkers()
+      runFilters()
     )
 
   $('#price-range').slider(
@@ -125,9 +113,7 @@ jQuery ->
       $("#filtered-price").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
       currentPriceFilter.min = ui.values[0]
       currentPriceFilter.max = ui.values[1]
-      Gmaps.map.resetSidebarContent()
-      hideAllMarkers()
-      visibleMarkers()
+      runFilters()
     )
 
   $("select").chosen().change(->
@@ -135,54 +121,65 @@ jQuery ->
       currentMarketFilters = $('select').val()
     else
       currentMarketFilters = []
-    Gmaps.map.resetSidebarContent()
-    hideAllMarkers()
-    visibleMarkers()
   )
 
-  filterPrice = (min_price, max_price) -> 
+  # various filters
 
-    
-  visibleMarkers = ->
-    filtered = Gmaps.map.markers
-
-    if currentStatusFilters != "all"
-      filtered = _.filter(filtered, (marker) ->
-        if currentStatusFilters == "active"
-          marker.sold_out == false
-        else
-          marker.sold_out == true
-      )
-
-    filtered = _.reject(filtered, (marker) ->
+  filterDuration = (markers) ->
+    _.reject(markers, (marker) ->
       (marker.duration < currentDurationFilter.min) || (marker.duration > currentDurationFilter.max)
     )
 
-    filtered = _.reject(filtered, (marker) ->
+  filterPrice = (markers) ->
+    _.reject(markers, (marker) ->
       (marker.price < currentPriceFilter.min) || (marker.price > currentPriceFilter.max)
     )
 
+  filterMarket = (markers) ->
     if (currentMarketFilters.length != 0)
-      filtered = _.filter(filtered, (marker) ->
+      _.filter(markers, (marker) ->
         _.include(currentMarketFilters, marker.market)
       )
+  filterStatus = (markers) ->
+    _.filter(markers, (marker) ->
+      if currentStatusFilters == "active"
+        marker.sold_out == false
+      else
+        marker.sold_out == true
+    )
 
+  filterDate = (markers) ->
+    _.filter(filtered, (marker) ->
+      _.any(marker.dates, (date) ->
+        testDate = new Date(date.date)
+        currentDateFilter.start <= testDate && testDate <= currentDateFilter.end
+      ) 
+    )
+
+  # main method to display all the markers
+  visibleMarkers = ->
+    filtered = Gmaps.map.markers
+    if currentStatusFilters != "all"
+      filtered = filterStatus filtered
+    filtered = filterDuration filtered
+    filtered = filterPrice filtered
+    filtered = filterMarket filtered
     if (currentDateFilter.start != null && currentDateFilter.end != null)
-      filtered = _.filter(filtered, (marker) ->
-        _.any(marker.dates, (date) ->
-          testDate = new Date(date.date)
-          console.log "testDate: #{testDate} filterStart #{currentDateFilter.start} filterEnd #{currentDateFilter.end}"
-          currentDateFilter.start <= testDate && testDate <= currentDateFilter.end
-        ) 
-      )
+      filtered = filterDate filtered
 
-
+    # display each of the markers
     _.each filtered, (marker) ->
       Gmaps.map.createSidebar marker
       Gmaps.map.showMarker marker
 
+    # reset the bounds of the map
     Gmaps.map.adjustMapToBounds()
 
   hideAllMarkers = ->
     _.each Gmaps.map.markers, (marker) ->
       Gmaps.map.hideMarker marker
+
+  runFilters = ->
+    Gmaps.map.resetSidebarContent()
+    hideAllMarkers()
+    visibleMarkers()
