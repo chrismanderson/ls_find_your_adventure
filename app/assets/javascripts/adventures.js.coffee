@@ -5,7 +5,6 @@ initializeSorter = (params) ->
           (if $(a).find("##{param}").data("#{param}") > $(b).find("##{param}").data("#{param}") then 1 else -1)
 
 jQuery ->
-  
   # Establishing some filter constants
   currentMarketFilters = []
   currentDateFilter =

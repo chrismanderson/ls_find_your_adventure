@@ -70,16 +70,20 @@ class LivingSocial
                   buy_url: buy_url}
   end
 
+  def self.save_market_to_db params
+    db_market = Market.find_or_create_by_city params[:market]
+    db_market.latitude = params[:latitude]
+    db_market.longitude = params[:longitude]
+    db_market.save
+    db_market
+  end
+
   def self.save_to_db(adventures)
     puts adventures.first.inspect
     adventures.each do |params|
       puts params[:title]
       puts params[:dates]
-      db_market = Market.find_or_create_by_city params[:market]
-      db_market.latitude = params[:latitude]
-      db_market.longitude = params[:longitude]
-      db_market.save
-
+      db_market = save_market_to_db params
       db_adventure = Adventure.find_or_initialize_by_title params[:title]
 
       params[:dates].each do |date|
@@ -111,11 +115,13 @@ class LivingSocial
     agent = Mechanize.new
     adventure_home = agent.get('http://livingsocial.com/adventures')
     adventure_indexes = fetch_index_links adventure_home
+    puts adventure_indexes
+    index_count = adventure_indexes.count
 
     current_index = adventure_home
     adventures_list = []
     
-    7.times do |i|
+    index_count.times do |i|
       puts "new page"
       adventures_list << fetch_adventures(current_index)
       next_link = current_index.link_with(:text => "Next")
