@@ -17,7 +17,7 @@
                      :locals => { :dates => adventure.adventure_dates} %>
     </div>
     <% else %>
-    <%= link_to "Sold out", adventure.buy_url, :class => "btn btn-warning btn-large disabled" %>
+    <%= link_to "Sold out", adventure.buy_url, :class => "btn btn-warning btn-large disabled" %><br>
     <%= link_to "View expired deal", adventure.buy_url, :class => "expired_url" %>
     <% end %>
   </div>

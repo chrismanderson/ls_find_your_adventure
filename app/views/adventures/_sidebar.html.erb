@@ -1,6 +1,8 @@
 <div class="row-fluid" id="sold_out <%= adventure.sold_out %>">
   <div class="span2">
-    <%= image_tag adventure.image_url, :class => "image-item" %>
+    <div class="image-box">
+    <%= image_tag adventure.image_url_with_size(125), :class => "image-item" %>
+  </div>
   </div>
 
   <div class="span7">

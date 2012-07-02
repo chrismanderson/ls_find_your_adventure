@@ -4,14 +4,43 @@
 #meta-bar {
   color: black;
   padding: 0 10px 10px 10px;
-  @include background-image(linear-gradient(#ffffff, #ededed));
+  @include background-image(linear-gradient(#666666, #454545));
   height: 110px;
   max-width: 100%;
+  text-shadow: 1px 1px black;
   @include single-box-shadow;
+
+  #title {
+    margin: 10px;
+  }
+
+  h2 {
+    color: white;
+  }
+
+  h3 {
+    color: white;
+  }
+
+  h1 {
+    color: white;
+    .call-out {
+      color: #e9ba26;
+    }
+  }
+
+  a {
+    color: #e9ba26;
+  }
 
   h2 {
     font-size: 16px;
+
   }
+}
+
+#add-on-box {
+  width: 40px;
 }
 
 h1 {
@@ -19,7 +48,7 @@ h1 {
 }
 
 #slider-box {
-
+  color: white;
 }
 .slider-value {
   display: inline;
@@ -81,6 +110,10 @@ h1 {
   width: 95%;
 }
 
+.chzn-choices {
+  text-shadow: none;
+}
+
 #datepicker-box {
   label {
     display: inline;
@@ -96,17 +129,19 @@ input.hasDatepicker#from {
 }
 
 input.hasDatepicker#to {
-  width: 60%;
+  width: 50%;
 }
 
 #left_list_area {
   width: 358px;
   position: absolute;
   @include single-box-shadow;
-  top: 122px;
+  top: 120px;
+  border: 1px solid black;
   bottom: 0;
   left: 0;
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   @include background(
     radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -116,13 +151,25 @@ input.hasDatepicker#to {
   background-size:16px 16px;
 }
 
+.image-box {
+      @include single-box-shadow;
+      width: 45px;
+      height: 40px;
+      z-index: 200;
+      margin-left: 8px;
+    }
+
+.button-row {
+  @include background-image(linear-gradient(#666666, #454545));
+  text-align:center;
+  height: 35px;
+  padding-top: 5px;
+}
 
 ul#sidebar_adventure_list {
   list-style-type: none;
-  margin-left: 0;
+  margin-left: 2px;
   text-shadow: white 0px 1px 0px;
-
-
   a {
     text-decoration: none;
   }
@@ -164,11 +211,16 @@ ul#sidebar_adventure_list {
   }
 
   li img {
-    clip: rect(0 60px 50px 5px);
-    left: -5px;
+    clip: rect(0 50px 45px 5px);
+    left: 5px;
     position: absolute;
     @include border-radius(4px);
+    
+
+
   }
+
+
 
   li h3 {
     font-size: 16px;
@@ -187,7 +239,7 @@ ul#sidebar_adventure_list {
 
 #map_area {
   position: static;
-  top: 25px;
+  top: 24px;
   bottom: 0;
   right: 0;
   left: 0;
