@@ -22,7 +22,7 @@ jQuery ->
   initializeSorter(["duration","price"])
   $("#filtered-duration").html "2 hours - 12 hours"
   $(".chzn-select").chosen()
-  $( "#filtered-rev" ).val( "$" + Adventure.min_price + " - $" + Adventure.max_price )
+  $( "#filtered-price").html( "$" + Adventure.min_price + " - $" + Adventure.max_price )
   
   # datepicker methods
   $("#from").datepicker
@@ -96,7 +96,7 @@ jQuery ->
     max: 12,
     values: [ 0, 12 ]
     slide: (event, ui) ->
-      $("#filtered-duration").html "$#{ui.values[0]}  - $  #{ui.values[1]}"
+      $("#filtered-duration").html "#{ui.values[0]} hours -   #{ui.values[1]} hours"
       currentDurationFilter.min = ui.values[0]
       currentDurationFilter.max = ui.values[1]
       runFilters()

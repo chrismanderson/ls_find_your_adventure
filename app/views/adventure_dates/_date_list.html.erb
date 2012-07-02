@@ -1,6 +1,8 @@
 <ul>
+  <li id="date_heading">Available dates</li>
 
 <% AdventureDate.group_by_month(dates).each do |monthname, posts| %>
+
 <li><%= monthname %></li>
 <li>
   <% posts.each do |post| %>

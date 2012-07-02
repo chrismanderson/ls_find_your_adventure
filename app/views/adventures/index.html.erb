@@ -1,23 +1,39 @@
 <div class="row-fluid navbar navbar-fixed-top" id="meta-bar">
-  <div class="span4">
-    <h1>City?</h1>
+  <div class="span4" id="title">
+    <h1>Find your Adventure!</h1>
+    <h3>via <a href="http://livingsocial.com/adventures">LivingSocial</a></h3>
+
+  
+
+
+  </div>
+
+  <div class="span3">
+    <h2>City?</h2>
         <%= select("market", "market_id", 
         Market.all.collect {|p| [ p.city, p.city, 
           {:'data-lat' => p.latitude, :'data-lng' => p.longitude}] }, 
         {},{:class=>'chzn-select', :'data-placeholder' => "Find cities!", :multiple => true }) %>
   </div>
 
-  <div class="span4">
-    <div id="datepicker-box"><h1>Date?</h1>
-    <label for="from">From</label>
-    <input type="text" id="from" name="from"/>
-    <label for="from">To</label>
-    <input type="text" id="to" name="to"/>
+  <div class="span2">
+    <div id="datepicker-box"><h2>Date?</h2>
+
+    <div class="input-prepend">
+      <span class="add-on">From:</span>
+      <input type="text" class="input-mini" id="from" name="from"/>
+    </div>
+
+    <div class="input-prepend">
+      <span class="add-on">To:</span>
+      <input type="text" id="to" name="to"/>
+    </div>
   </div>
   </div>
 
-  <div class="span4">
-    <h1>Price?</h1><div id="filtered-price" ></div>
+  <div class="span3" id="slider-box">
+    <h2>Price:  </h2><div id="filtered-price" class='slider-value'></div>
+
     <div id='price-range'>
     </div>
     <p>
@@ -25,9 +41,8 @@
     </p>
     
 
-
-
-    <h1>Length?</h1><div id="filtered-duration"></div>
+    <h2>Length: </h2><div id="filtered-duration" class='slider-value'></div>
+    <br>
     <div id='duration-range'>
     </div>
     <p>
@@ -35,22 +50,20 @@
     </p>
   </div>
 
-  <div class="span3">
-  </div>
+  
 </div>
 
 <div class="row-fluid" id="map_area">
   <div class="span4" id="left_list_area" >
     <div class="btn-group" id="status-toggle" data-toggle="buttons-radio">
-      <button class="btn active" value="all">All Deals</button>
-      <button class="btn" value="active">Active</button>
-      <button class="btn" value="sold_out">Sold out</button>
+      <button class="btn active btn-small btn-info" value="all">All Deals</button>
+      <button class="btn btn-small btn-info" value="active">Active</button>
+      <button class="btn btn-small btn-info" value="sold_out">Sold out</button>
     </div>
-    <h2>Sort by</h2>
+
     <div class="btn-group" id="sort-toggle" data-toggle="buttons-radio">
-    <a id="sort_price" class="btn">Price</a>
-    <a id="sort_sold_out" class="btn">Sold out?</a>
-    <a id="sort_duration" class="btn">Duration</a>
+    <a id="sort_price" class="btn btn-small btn-info">Price <span class="caret"></span></a>
+    <a id="sort_duration" class="btn btn-small btn-info">Duration <span class="caret"></span></a>
     </div>
     <ul id="sidebar_adventure_list">
     </ul>

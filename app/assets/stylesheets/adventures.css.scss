@@ -3,28 +3,73 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #meta-bar {
   color: black;
-  padding: 10px 10px 10px 10px;
+  padding: 0 10px 10px 10px;
   @include background-image(linear-gradient(#ffffff, #ededed));
-  height: 125px;
+  height: 110px;
   max-width: 100%;
   @include single-box-shadow;
 
-  h1 {
-    font-size: 20px;
+  h2 {
+    font-size: 16px;
   }
 }
 
+#slider-box {
+
+}
+.slider-value {
+  display: inline;
+  margin-bottom: 20px;
+  line-height: 1em;
+}
+
+
+#filtered-duration {
+  text-align: right;
+}
+
+#status-toggle {
+  display: inline-block;
+}
+
+#sort-toggle {
+  display: inline-block;
+}
+
 .info_window {
-    p#price_box {
-      color: #59be17;
-      font-size: 1.5em;
-      font-weight: 600;
-    
+  #available_dates {
+  ul {
+    margin-left: 0px;
+    margin-top: 10px;
+    li {
+      list-style-type: none;
+    }
+  }
+  }
+
+  #date_heading {
+        font-weight: bold;
+      }
+
+  p#price_box {
+    color: #59be17;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+
+
+
+
+}
+
+#slider-box {
+  h2 {
+    display: inline;
   }
 }
 
 .ui-slider {
-  width: 50%;
+  width: 40%;
 }
 
 .chzn-select {
@@ -35,16 +80,25 @@
   label {
     display: inline;
   }
+
+  label#to {
+    display: inline;
+  }
 }
-input.hasDatepicker {
-  width: 35%;
+
+input.hasDatepicker#from {
+  width: 50%;
+}
+
+input.hasDatepicker#to {
+  width: 60%;
 }
 
 #left_list_area {
   width: 358px;
   position: absolute;
   @include single-box-shadow;
-  top: 175px;
+  top: 122px;
   bottom: 0;
   left: 0;
   overflow: auto;
@@ -62,8 +116,6 @@ ul#sidebar_adventure_list {
   list-style-type: none;
   margin-left: 0;
   text-shadow: white 0px 1px 0px;
-
-
 
 
   a {
@@ -138,7 +190,7 @@ ul#sidebar_adventure_list {
 
 .map_container {
   position: absolute;
-  top: 175px;
+  top: 122px;
   left: 360px;
   right: 0;
   bottom: 0;
