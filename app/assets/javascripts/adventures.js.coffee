@@ -65,11 +65,18 @@ jQuery ->
     else
       setTimeout(fetchUserLocation, 2000);
 
+  Gmaps.map.geolocationFailure = (browser_support) ->
+    if browser_support is true
+      runFilters()
+    else
+      runFilters()
+
   Gmaps.map.callback = ->
     Gmaps.map.adjustMapToBounds()
     fetchUserLocation()
 
   alertMarkets = (userLocation) ->
+    console.log "am i getting called"
     $.get "/api/v1/markets/nearest",
       lat: userLocation.lat()
       lng: userLocation.lng()
@@ -116,10 +123,13 @@ jQuery ->
     )
 
   $("select").chosen().change(->
+    console.log "changed thigns"
     if ($('select').val())
       currentMarketFilters = $('select').val()
     else
+      console.log "nothing here"
       currentMarketFilters = []
+    runFilters()
   )
 
   # various filters
@@ -135,10 +145,11 @@ jQuery ->
     )
 
   filterMarket = (markers) ->
-    if (currentMarketFilters.length != 0)
-      _.filter(markers, (marker) ->
-        _.include(currentMarketFilters, marker.market)
-      )
+    console.log currentMarketFilters.length != 0
+    _.filter(markers, (marker) ->
+      _.include(currentMarketFilters, marker.market)
+    )
+
   filterStatus = (markers) ->
     _.filter(markers, (marker) ->
       if currentStatusFilters == "active"
@@ -162,7 +173,8 @@ jQuery ->
       filtered = filterStatus filtered
     filtered = filterDuration filtered
     filtered = filterPrice filtered
-    filtered = filterMarket filtered
+    if (currentMarketFilters.length != 0)
+      filtered = filterMarket filtered
     if (currentDateFilter.start != null && currentDateFilter.end != null)
       filtered = filterDate filtered
 
