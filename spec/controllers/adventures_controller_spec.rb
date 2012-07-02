@@ -25,19 +25,18 @@ describe AdventuresController do
     end
   end
 
-  context '#render_meta' do
+  context '#to_meta' do
     let!(:adventure_1) { FactoryGirl.create(:adventure, :sold_out => true ) }
     let!(:adventure_2) { FactoryGirl.create(:adventure) }
 
     def app
-      AdventuresController.action(:render_meta)
+      AdventuresController.action(:to_meta)
     end
 
     it 'returns a string' do
       @controller = AdventuresController.new
-      @controller.should_receive(:render_meta)
-      @controller.instance_eval { render_meta }
-      
+      @controller.should_receive(:to_meta)
+      @controller.instance_eval { to_meta }
     end
   end
 end

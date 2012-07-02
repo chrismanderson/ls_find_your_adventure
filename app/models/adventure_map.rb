@@ -8,7 +8,7 @@ module AdventureMap
   end
 
   def self.marker_options
-    { 
+    {
       list_container: 'sidebar_adventure_list',
       raw: '{ animation: google.maps.Animation.DROP }'
     }
@@ -22,11 +22,15 @@ module AdventureMap
     }
   end
 
+  def self.info content
+    "<div style='width: 350px'>#{content}</div>"
+  end
+
   def self.create_map map
     {
       "map_options" => map_options,
       "markers" => { "data" => map,
-                     "options" => marker_options 
+                     "options" => marker_options
             }
     }
   end

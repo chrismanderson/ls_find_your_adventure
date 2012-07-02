@@ -13,11 +13,11 @@ class Adventure < ActiveRecord::Base
   end
 
   def self.min_price
-    Adventure.minimum('price') 
+    Adventure.minimum('price')
   end
 
   def to_gmaps_json
-    { :market => market.city, 
+    { :market => market.city,
       :sold_out => sold_out,
       :price => price,
       :duration => duration,

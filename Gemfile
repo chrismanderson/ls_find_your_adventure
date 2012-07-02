@@ -35,6 +35,8 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'guard'
+  gem 'cane'
+  gem 'reek'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'simplecov', :require => false
