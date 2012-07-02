@@ -11,6 +11,7 @@ class AdventuresController < ApplicationController
       marker.json adventure.to_gmaps_json
     end
     @gmap_options = AdventureMap.create_map @map
+
   end
 
   private
