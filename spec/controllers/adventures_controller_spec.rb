@@ -24,4 +24,20 @@ describe AdventuresController do
       get '/adventures'    
     end
   end
+
+  context '#render_meta' do
+    let!(:adventure_1) { FactoryGirl.create(:adventure, :sold_out => true ) }
+    let!(:adventure_2) { FactoryGirl.create(:adventure) }
+
+    def app
+      AdventuresController.action(:render_meta)
+    end
+
+    it 'returns a string' do
+      @controller = AdventuresController.new
+      @controller.should_receive(:render_meta)
+      @controller.instance_eval { render_meta }
+      
+    end
+  end
 end
