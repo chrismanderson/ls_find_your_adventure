@@ -32,13 +32,8 @@ jQuery ->
   $( "#filtered-price").html( "$" + Adventure.min_price + " - $" + Adventure.max_price )
   
   filterCalendar = ->
-    end_date = $("#to").datepicker "getDate"
-    start_date = $("#from").datepicker "getDate"
-    console.log end_date
-    console.log start_date
-    console.log "filterDate"
-    currentDateFilter.start = start_date
-    currentDateFilter.end = end_date
+    currentDateFilter.start = $("#from").datepicker "getDate"
+    currentDateFilter.end = $("#to").datepicker "getDate"
     runFilters()
 
   # datepicker methods
@@ -134,11 +129,9 @@ jQuery ->
     )
 
   $("select").chosen().change(->
-    console.log "changed thigns"
     if ($('select').val())
       currentMarketFilters = $('select').val()
     else
-      console.log "nothing here"
       currentMarketFilters = []
     runFilters()
   )
@@ -156,7 +149,6 @@ jQuery ->
     )
 
   filterMarket = (markers) ->
-    console.log currentMarketFilters.length != 0
     _.filter(markers, (marker) ->
       _.include(currentMarketFilters, marker.market)
     )
@@ -170,8 +162,6 @@ jQuery ->
     )
 
   filterDate = (markers) ->
-    console.log "filtering the dates"
-    console.log currentDateFilter.start
     console.log currentDateFilter.end
     _.filter(markers, (marker) ->
       _.any(marker.dates, (date) ->
