@@ -6,6 +6,7 @@ FindYourAdventure::Application.routes.draw do
     namespace :v1 do
       match "markets/nearest" => 'markets#nearest'
       resources :markets
+      resources :adventures
     end
   end
 
