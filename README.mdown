@@ -1,0 +1,23 @@
+## FindYourAdventure
+### Let the map guide you to your next awesome adventure.
+
+Live version: [http://findyouradventure.herokuapp.com](http://findyouradventure.herokuapp.com)
+
+I used Mechanize to parse all of the LivingSocial adventures from the main LivingSocial site. In addition to things like title, city, and price, each adventure is stored with its associated market and current available dates.
+
+I used the GMaps4Rails gem to load up the adventures onto a Google Map. I then used a mix of JQueryUI and some other custom JS to enable you to filter the adventures based on various criteria. 
+
+I'm particularly proud of getting the Google map to run full bleed on the page, the date picker that lets you filter adventures by their current available dates, and the rake task itself that is just a giant mess of regular expressions, splits, and other assorted Mechanize wonkyness.
+
+### To run locally:
+
+Clone the app down.
+
+    bundle install
+    rake db:migrate
+    rake livingsocial:get_adventures
+  
+To run specs:
+
+    guard
+
