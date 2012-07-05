@@ -4,6 +4,13 @@ initializeSorter = (params) ->
         $("#sidebar_adventure_list li").sortElements (a, b) ->
           (if $(a).find("##{param}").data("#{param}") > $(b).find("##{param}").data("#{param}") then 1 else -1)
 
+pageLoad = ->
+  if document.cookie.search(/(^|;)visited=/) > -1
+    console.log "Already visited."
+  else
+    document.cookie = "visited=true;max-age=" + 60 * 60 * 24 * 10
+    $('#myModal').modal('show')
+
 jQuery ->
 
   # Establishing some filter constants
@@ -20,17 +27,15 @@ jQuery ->
     max: 12
 
   # starting up 
-  if document.cookie.search(/(^|;)visited=/) > -1
-    console.log "Already visited."
-  else
-    document.cookie = "visited=true;max-age=" + 60 * 60 * 24 * 10
-    $('#myModal').modal('show')
+  pageLoad()
 
   initializeSorter(["duration","price"])
   $("#filtered-duration").html "2 hours - 12 hours"
   $(".chzn-select").chosen()
   $( "#filtered-price").html( "$" + Adventure.min_price + " - $" + Adventure.max_price )
   
+  # calendar filter
+
   filterCalendar = ->
     currentDateFilter.start = $("#from").datepicker "getDate"
     currentDateFilter.end = $("#to").datepicker "getDate"

@@ -5,7 +5,6 @@ class Market < ActiveRecord::Base
   attr_accessible :city
 
   validates_presence_of :city
-  validates_numericality_of :latitude, :longitude
 
   def gmaps4rails_address
     "#{self.city}"
