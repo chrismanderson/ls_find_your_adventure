@@ -27,7 +27,7 @@ class LivingSocial
 
   def self.parse_duration page
     if page.at('.highlights p')
-      page.at('.highlights p').text.split(" ")[1]
+      page.at('.highlights p').text.split(" ")[1].gsub('-', '.')
     else
       page.root.xpath('//div/h2[2]/following-sibling::text()').text.match(/[0-9|\.]+/)[0]
     end
@@ -72,6 +72,7 @@ class LivingSocial
 
   def self.save_market_to_db params
     db_market = Market.find_or_create_by_city params[:market]
+    puts db_market.city
     db_market.latitude = params[:latitude]
     db_market.longitude = params[:longitude]
     db_market.save
